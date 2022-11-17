@@ -1,5 +1,11 @@
 # Compiled class file
-*.class
+
+authServer/target/
+course/target/
+notification/target/
+
+
+#*.class
 
 # Log file
 *.log

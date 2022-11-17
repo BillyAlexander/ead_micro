@@ -1,22 +1,25 @@
 package com.ead.authServer.controllers;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.ead.authServer.dtos.UserDto;
 import com.ead.authServer.enums.UserStatus;
 import com.ead.authServer.enums.UserType;
 import com.ead.authServer.models.UserModel;
 import com.ead.authServer.services.UserService;
 import com.fasterxml.jackson.annotation.JsonView;
-import org.apache.catalina.User;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
