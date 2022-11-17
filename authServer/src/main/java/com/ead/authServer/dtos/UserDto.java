@@ -1,15 +1,16 @@
 package com.ead.authServer.dtos;
 
-import com.ead.authServer.validation.UserNameConstraint;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonView;
-import lombok.Data;
+import java.util.UUID;
 
-import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.UUID;
+
+import com.ead.authServer.validation.UserNameConstraint;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonView;
+
+import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)

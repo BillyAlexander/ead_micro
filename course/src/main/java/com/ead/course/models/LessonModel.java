@@ -21,11 +21,11 @@ public class LessonModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID lessonId;
     @Column(nullable = false,length = 150)
-    private String tittle;
+    private String title;
     @Column(nullable = false,length = 250)
     private String description;
     @Column(nullable = false)
-    private String imageUrl;
+    private String videoUrl;
     @Column(nullable = false)
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="dd-MM-yyyy HH:mm:ss")
     private LocalDateTime creationDate;
