@@ -26,14 +26,16 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Table(name = "TB_COURSES")
 public class CourseModel implements Serializable {
-    private static long serialVersionId=1L;
+    private static final long serialVersionUID=1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -52,7 +54,7 @@ public class CourseModel implements Serializable {
     private LocalDateTime lastUpdateDate;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private CourseStatus CourseStatus;
+    private CourseStatus courseStatus;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private CourseLevel courseLevel;
@@ -62,5 +64,5 @@ public class CourseModel implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(FetchMode.SUBSELECT)
-    private Set<ModuleModel> moduless;
+    private Set<ModuleModel> modules;
 }

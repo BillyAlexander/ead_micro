@@ -57,6 +57,7 @@ public class CourseServiceImpl implements CourseService {
 		return courseRepository.findById(courseId);
 	}
 
+	@Transactional
 	@Override
 	public Page<CourseModel> findAll(Specification<CourseModel> spec, Pageable pageable) {
 		return courseRepository.findAll(spec, pageable );
