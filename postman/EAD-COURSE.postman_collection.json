@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b9becd19-9e17-4232-954e-580001966437",
+		"_postman_id": "96538a0e-3e13-449e-bc32-d66991f3f3c4",
 		"name": "EAD-COURSE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -12,16 +12,23 @@
 					"name": "GET ALL COURSES",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "description",
+								"value": "2.0",
+								"type": "default"
+							}
+						],
 						"url": {
-							"raw": "http://localhost:8082/courses",
+							"raw": "http://localhost:8086/courses/?sort=creationDate,ASC",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8086",
 							"path": [
-								"courses"
+								"courses",
+								""
 							],
 							"query": [
 								{
@@ -31,13 +38,7 @@
 								},
 								{
 									"key": "sort",
-									"value": "creationDate,ASC",
-									"disabled": true
-								},
-								{
-									"key": "name",
-									"value": "Curso",
-									"disabled": true
+									"value": "creationDate,ASC"
 								},
 								{
 									"key": "courseStatus",
@@ -58,6 +59,16 @@
 									"key": "page",
 									"value": "0",
 									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Spring",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "crie",
+									"disabled": true
 								}
 							]
 						}
@@ -70,15 +81,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8082/courses/868972ad-0231-48c6-81c4-ecdeb1114391",
+							"raw": "http://localhost:8086/courses/c2d10e7f-1566-4b4d-b4ab-fb90ba72f1a0",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8086",
 							"path": [
 								"courses",
-								"868972ad-0231-48c6-81c4-ecdeb1114391"
+								"c2d10e7f-1566-4b4d-b4ab-fb90ba72f1a0"
 							]
 						}
 					},
@@ -97,17 +108,18 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Curso Spring Security\",\r\n    \"description\": \"Crie Autenticação com Spring Security em Microservices\",\r\n    \"userInstructor\": \"ed235441-89e3-4de5-87af-0cfb2ac8a9d8\",\r\n    \"courseStatus\": \"CONCLUDED\",\r\n    \"courseLevel\": \"BEGINNER\"\r\n}"
+							"raw": "{\r\n    \"name\": \"Curso Spring Boot\",\r\n    \"description\": \"Crie Autenticação com Spring Security em Microservices\",\r\n    \"userInstructor\": \"571862f3-487f-4c69-89a8-ff62f1cdc8a2\",\r\n    \"courseStatus\": \"CONCLUDED\",\r\n    \"courseLevel\": \"BEGINNER\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/courses",
+							"raw": "http://localhost:8086/courses/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8086",
 							"path": [
-								"courses"
+								"courses",
+								""
 							]
 						}
 					},
@@ -119,15 +131,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8082/courses/868972ad-0231-48c6-81c4-ecdeb1114391",
+							"raw": "http://localhost:8086/courses/29360931-c827-401c-9d90-1de87a088313",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8086",
 							"path": [
 								"courses",
-								"868972ad-0231-48c6-81c4-ecdeb1114391"
+								"29360931-c827-401c-9d90-1de87a088313"
 							]
 						}
 					},
@@ -146,18 +158,18 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Curso Spring Security 2.0\",\r\n    \"description\": \"Crie Autenticação com Spring Security em Microservices\",\r\n    \"userInstructor\": \"ed235441-89e3-4de5-87af-0cfb2ac8a9d8\",\r\n    \"courseStatus\": \"CONCLUDED\",\r\n    \"courseLevel\": \"BEGINNER\"\r\n}"
+							"raw": "{\r\n    \"name\": \"Curso Spring Security 2.0\",\r\n    \"description\": \"Crie Autenticação com Spring Security em Microservices\",\r\n    \"userInstructor\": \"571862f3-487f-4c69-89a8-ff62f1cdc8a2\",\r\n    \"courseStatus\": \"CONCLUDED\",\r\n    \"courseLevel\": \"BEGINNER\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/courses/868972ad-0231-48c6-81c4-ecdeb1114391",
+							"raw": "http://localhost:8086/courses/a4173122-9317-4efd-af23-edc5cb5a4d00",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8086",
 							"path": [
 								"courses",
-								"868972ad-0231-48c6-81c4-ecdeb1114391"
+								"a4173122-9317-4efd-af23-edc5cb5a4d00"
 							]
 						}
 					},
@@ -181,18 +193,18 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Modulo 1\",\r\n    \"description\": \"Inserindo Spring Security e Configurando Projeto\"\r\n}"
+							"raw": "{\r\n    \"title\": \"Modulo 3\",\r\n    \"description\": \"Inserindo Spring Security e Configurando Projeto\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/courses/67feed06-dcc8-4832-a57d-8cdb4118dc4d/modules",
+							"raw": "http://localhost:8086/courses/a4173122-9317-4efd-af23-edc5cb5a4d00/modules",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8086",
 							"path": [
 								"courses",
-								"67feed06-dcc8-4832-a57d-8cdb4118dc4d",
+								"a4173122-9317-4efd-af23-edc5cb5a4d00",
 								"modules"
 							]
 						}
@@ -205,26 +217,21 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8082/courses/67feed06-dcc8-4832-a57d-8cdb4118dc4d/modules",
+							"raw": "http://localhost:8086/courses/a4173122-9317-4efd-af23-edc5cb5a4d00/modules?title=1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8086",
 							"path": [
 								"courses",
-								"67feed06-dcc8-4832-a57d-8cdb4118dc4d",
+								"a4173122-9317-4efd-af23-edc5cb5a4d00",
 								"modules"
 							],
 							"query": [
 								{
 									"key": "sort",
 									"value": "creationDate,ASC",
-									"disabled": true
-								},
-								{
-									"key": "title",
-									"value": "Modulo",
 									"disabled": true
 								},
 								{
@@ -236,6 +243,10 @@
 									"key": "size",
 									"value": "1",
 									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "1"
 								}
 							]
 						}
@@ -248,18 +259,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8082/ead-courses/courses/8/modules/57",
+							"raw": "http://localhost:8086/courses/a4173122-9317-4efd-af23-edc5cb5a4d00/modules/3160b540-c45d-48fc-9c22-f0f468e5ae15",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8086",
 							"path": [
-								"ead-courses",
 								"courses",
-								"8",
+								"a4173122-9317-4efd-af23-edc5cb5a4d00",
 								"modules",
-								"57"
+								"3160b540-c45d-48fc-9c22-f0f468e5ae15"
 							]
 						}
 					},
@@ -271,17 +281,17 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8082/courses/868972ad-0231-48c6-81c4-ecdeb1114391/modules/f8b4e578-919f-46b7-a7ff-2eddcc663ec0",
+							"raw": "http://localhost:8086/courses/a4173122-9317-4efd-af23-edc5cb5a4d00/modules/f3c44e14-fd61-4ff9-a821-978b5e242850",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8086",
 							"path": [
 								"courses",
-								"868972ad-0231-48c6-81c4-ecdeb1114391",
+								"a4173122-9317-4efd-af23-edc5cb5a4d00",
 								"modules",
-								"f8b4e578-919f-46b7-a7ff-2eddcc663ec0"
+								"f3c44e14-fd61-4ff9-a821-978b5e242850"
 							]
 						}
 					},
@@ -294,13 +304,13 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/ecmascript",
+								"value": "application/json",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"description\": \"Inserindo Spring Security e Configurando Projeto - Atualizado\"\r\n}",
+							"raw": "{\r\n    \"description\": \"Inserindo Spring Security e Configurando Projeto - Atualizado\",\r\n    \"title\": \"Modulo 1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -308,17 +318,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8082/courses/868972ad-0231-48c6-81c4-ecdeb1114391/modules/f8b4e578-919f-46b7-a7ff-2eddcc663ec0",
+							"raw": "http://localhost:8086/courses/a4173122-9317-4efd-af23-edc5cb5a4d00/modules/3160b540-c45d-48fc-9c22-f0f468e5ae15",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8086",
 							"path": [
 								"courses",
-								"868972ad-0231-48c6-81c4-ecdeb1114391",
+								"a4173122-9317-4efd-af23-edc5cb5a4d00",
 								"modules",
-								"f8b4e578-919f-46b7-a7ff-2eddcc663ec0"
+								"3160b540-c45d-48fc-9c22-f0f468e5ae15"
 							]
 						}
 					},
@@ -335,26 +345,18 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8082/modules/7597ae07-dc5f-4e96-b4ae-ac5bf0a10205/lessons?sort=creationDate,DESC&title=Aula 2",
+							"raw": "http://localhost:8086/modules/3160b540-c45d-48fc-9c22-f0f468e5ae15/lessons",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8086",
 							"path": [
 								"modules",
-								"7597ae07-dc5f-4e96-b4ae-ac5bf0a10205",
+								"3160b540-c45d-48fc-9c22-f0f468e5ae15",
 								"lessons"
 							],
 							"query": [
-								{
-									"key": "sort",
-									"value": "creationDate,DESC"
-								},
-								{
-									"key": "title",
-									"value": "Aula 2"
-								},
 								{
 									"key": "page",
 									"value": "0",
@@ -362,7 +364,12 @@
 								},
 								{
 									"key": "size",
-									"value": "2",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "jpa",
 									"disabled": true
 								}
 							]
@@ -383,18 +390,18 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Aula 1 - Inserindo dependência.\",\r\n    \"description\": \"Inserindo depêndencia do arquivo pom.xml\",\r\n    \"videoUrl\": \"https://www.youtube.com/watch?v=LW-N44fZ1wk\"\r\n}"
+							"raw": "{\r\n    \"title\": \"Aula 2 - Inserindo JPA.\",\r\n    \"description\": \"Inserindo depêndencia do arquivo pom.xml\",\r\n    \"videoUrl\": \"https://www.youtube.com/watch?v=LW-N44fZ1wk\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/modules/0ac8a00e-4615-4ca1-b110-277d6d266ce0/lessons",
+							"raw": "http://localhost:8086/modules/3160b540-c45d-48fc-9c22-f0f468e5ae15/lessons",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8086",
 							"path": [
 								"modules",
-								"0ac8a00e-4615-4ca1-b110-277d6d266ce0",
+								"3160b540-c45d-48fc-9c22-f0f468e5ae15",
 								"lessons"
 							]
 						}
@@ -407,18 +414,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8082/ead-courses/modules/57/lessons/66",
+							"raw": "http://localhost:8086/modules/3160b540-c45d-48fc-9c22-f0f468e5ae15/lessons/03422203-95f9-45ba-ac54-0fc9f06f880c",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8086",
 							"path": [
-								"ead-courses",
 								"modules",
-								"57",
+								"3160b540-c45d-48fc-9c22-f0f468e5ae15",
 								"lessons",
-								"66"
+								"03422203-95f9-45ba-ac54-0fc9f06f880c"
 							]
 						}
 					},
@@ -430,12 +436,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8082/modules/be50d503-9ba7-4733-af5c-5e47bbe482de/lessons/0cb0b06c-2492-4a0c-a06a-16aadcc5c163",
+							"raw": "http://localhost:8086/modules/be50d503-9ba7-4733-af5c-5e47bbe482de/lessons/0cb0b06c-2492-4a0c-a06a-16aadcc5c163",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8086",
 							"path": [
 								"modules",
 								"be50d503-9ba7-4733-af5c-5e47bbe482de",
@@ -462,12 +468,12 @@
 							"raw": "{\r\n    \"videoUrl\": \"https://www.youtube.com/watch?v=LW-N44fZ1wkytutu\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/modules/be50d503-9ba7-4733-af5c-5e47bbe482de/lessons/0cb0b06c-2492-4a0c-a06a-16aadcc5c163",
+							"raw": "http://localhost:8086/modules/be50d503-9ba7-4733-af5c-5e47bbe482de/lessons/0cb0b06c-2492-4a0c-a06a-16aadcc5c163",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8086",
 							"path": [
 								"modules",
 								"be50d503-9ba7-4733-af5c-5e47bbe482de",

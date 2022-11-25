@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "91f3d781-39d6-4dc3-af72-bccbe4b78902",
+		"_postman_id": "f1ca5e3f-0aed-49ed-9adc-ba427eee9271",
 		"name": "EAD-AUTH-USER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -21,7 +21,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"michellibrito\",\r\n    \"email\": \"contato@michellibrito.com\",\r\n    \"password\": \"123456\",\r\n    \"fullName\": \"Michelli Brito\",\r\n    \"phoneNumber\": \"11999558844\",\r\n    \"cpf\": \"105984569895\"\r\n}"
+							"raw": "{\r\n    \"userName\": \"alexvilla\",\r\n    \"email\": \"alex22wb@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"fullName\": \"Alex Villa\",\r\n    \"phoneNumber\": \"0983325791\",\r\n    \"cpf\": \"0604121483\"\r\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8087/auth/signup",
@@ -51,7 +51,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"michellibrito\",\r\n    \"password\": \"123456\"\r\n}"
+							"raw": "{\r\n    \"userName\": \"alexvilla\",\r\n    \"password\": \"123456\"\r\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8087/auth/login",
@@ -189,10 +189,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n    \"fullName\": \"Michelli Brito Updated\",\r\n    \"phoneNumber\": \"+5511987542587\",\r\n    \"cpf\": \"12598456985\"\r\n}"
+							"raw": " {\r\n    \"fullName\": \"Alexander Villa\",\r\n    \"phoneNumber\": \"+593983325791\",\r\n    \"cpf\": \"0604121483\",\r\n    \"userType\": \"INSTRUCTOR\"\r\n\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8087/users/9743eddb-31d5-43a7-9986-e20a900d6bbd",
+							"raw": "http://localhost:8087/users/571862f3-487f-4c69-89a8-ff62f1cdc8a2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -200,7 +200,7 @@
 							"port": "8087",
 							"path": [
 								"users",
-								"9743eddb-31d5-43a7-9986-e20a900d6bbd"
+								"571862f3-487f-4c69-89a8-ff62f1cdc8a2"
 							]
 						}
 					},
