@@ -3,12 +3,15 @@ package com.ead.authServer.controllers;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,16 +24,22 @@ import com.ead.authServer.models.UserModel;
 import com.ead.authServer.services.UserService;
 import com.fasterxml.jackson.annotation.JsonView;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/auth")
 public class AuthenticationController {
     @Autowired
     UserService userService;
+    
+    //Logger logger = LogManager.getLogger(AuthenticationController.class);
 
     @PostMapping("/signup")
     public ResponseEntity<Object> registerUser(@RequestBody @Validated(UserDto.UserView.RegistrationPost.class) @JsonView(UserDto.UserView.RegistrationPost.class) UserDto userDto){
 
+    	log.debug("POST RECEIVED registerUser UserDto {}",userDto.toString());
         if(userService.existsByUserName(userDto.getUserName())){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Error: userName is already taken!.");
         }
@@ -45,7 +54,19 @@ public class AuthenticationController {
         userModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
         userModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
         userService.save(userModel);
+        log.debug("POST SAVED registerUser getUserId {}",userModel.getUserId());
         return ResponseEntity.status(HttpStatus.CREATED).body(userModel);
+    }
+    
+    @GetMapping("/")
+    public String index() {
+    	log.trace("TRACE");
+    	log.debug("DEBUG");
+    	log.info("INFO");
+    	log.warn("WARN");
+    	log.error("ERROR");
+    	
+    	return "Loggin Spring";
     }
 
 }
