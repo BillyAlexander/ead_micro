@@ -1,6 +1,8 @@
 package com.ead.authServer.services.impl;
 
+import com.ead.authServer.models.UserCourseModel;
 import com.ead.authServer.models.UserModel;
+import com.ead.authServer.repositories.UserCourseRepository;
 import com.ead.authServer.repositories.UserRepository;
 import com.ead.authServer.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +21,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
+    
+    @Autowired
+    UserCourseRepository userCourseRepository;
 
     @Override
     public List<UserModel> findAll() {
@@ -29,8 +35,13 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(userId);
     }
 
+    @Transactional
     @Override
     public void delete(UserModel userModel) {
+    	List<UserCourseModel> userCourseModelList = userCourseRepository.findAllUserCourseIntoUser(userModel.getUserId());
+    	if(!userCourseModelList.isEmpty()) {
+    		userCourseRepository.deleteAll(userCourseModelList);
+    	}
         userRepository.delete(userModel);
     }
 

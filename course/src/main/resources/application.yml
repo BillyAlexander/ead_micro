@@ -3,6 +3,8 @@ server:
   port: 8086
 
 spring:
+  application:
+    name: ead_course_service
   datasource:
     url: jdbc:postgresql://localhost:5432/ead_course
     username: postgres
@@ -30,4 +32,11 @@ logging:
 ead:
   api:
     url:
-      authuser: 'http://localhost:8087'
+      authuser: 'http://ead_authuser_service'
+      
+eureka:
+  client:
+    service-url:
+      defaultZone: 'http://localhost:8761/eureka'
+  instance:
+    hostname: localhost      
