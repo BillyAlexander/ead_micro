@@ -1,10 +1,12 @@
 
 server:
   port: 8086
+  servlet:
+    context-path: '/ead_course/'
 
 spring:
   application:
-    name: ead_course_service
+    name: ead-course-service
   datasource:
     url: jdbc:postgresql://localhost:5432/ead_course
     username: postgres
@@ -32,7 +34,7 @@ logging:
 ead:
   api:
     url:
-      authuser: 'http://ead_authuser_service'
+      authuser: 'http://ead-authuser-service'
       
 eureka:
   client:
