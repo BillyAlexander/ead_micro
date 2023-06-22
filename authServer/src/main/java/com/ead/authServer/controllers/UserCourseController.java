@@ -13,6 +13,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,8 +44,13 @@ public class UserCourseController {
 	UserCourseService userCourseService;
 	
 	@GetMapping("/{userId}/courses")
-	public ResponseEntity<Page<CourseDto>> getAllCoursesByUser(@PageableDefault(page = 0, size = 10,sort = "courseId", direction = Sort.Direction.ASC) Pageable pageable,
+	public ResponseEntity<Object> getAllCoursesByUser(@PageableDefault(page = 0, size = 10,sort = "courseId", direction = Sort.Direction.ASC) Pageable pageable,
 			@PathVariable(value = "userId") UUID userId){
+		
+		Optional<UserModel> userModelOptional = userService.findById(userId);
+		if (!userModelOptional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
+		}		
 		return ResponseEntity.status(HttpStatus.OK).body(userClient.getAllCoursesByUser(userId, pageable));
 	}
 	
@@ -61,6 +67,16 @@ public class UserCourseController {
 		
 		UserCourseModel userCourseModel = userCourseService.save(userModelOptional.get().convertToUserCourseModel(userCourseDto.getCourseId()));
 		return  ResponseEntity.status(HttpStatus.CREATED).body(userCourseModel);
+	}
+	
+	@DeleteMapping("/courses/{courseId}")
+	public ResponseEntity<Object> deleteUserCourseByCourse(@PathVariable(value = "courseId") UUID courseId){
+		if(!userCourseService.existsByCourseId(courseId)) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("UserCourse not found.");
+		}
+		
+		userCourseService.deleteUserCourseByCourse(courseId);
+		return ResponseEntity.status(HttpStatus.OK).body("USerCourse deleted successfully.");
 	}
 
 }

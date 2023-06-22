@@ -25,6 +25,11 @@ public class UtilsServiceImpl implements com.ead.course.services.UtilsService {
 	public String createUrlpostSubscriptionUserInCourse(UUID courseId, UUID userId) {
 		return "/users/"+userId+"/courses/subscription";
 	}
+
+	@Override
+	public String createUrldeleteCourseInAuthUser(UUID courseId) {
+		return "/users/courses/"+courseId;
+	}
 	
 
 }

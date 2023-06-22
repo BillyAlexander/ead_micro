@@ -63,7 +63,12 @@ public class AuthUserClient {
 	public void postSubscriptionUserInCourse(UUID courseId, UUID userId) {
 		String url = REQUEST_URL_AUTHUSER+utilsService.createUrlpostSubscriptionUserInCourse(courseId,userId);
 		CourseUserDto cudto = new CourseUserDto(courseId, userId);
-		restTemplate.postForObject(url, cudto, String.class);
+		restTemplate.postForObject(url, cudto, String.class);		
+	}
+
+	public void deleteCourseInAuthUser(UUID courseId) {
+		String url = REQUEST_URL_AUTHUSER+utilsService.createUrldeleteCourseInAuthUser(courseId);
+		restTemplate.exchange(url, HttpMethod.DELETE, null, String.class);
 		
 	}
 
