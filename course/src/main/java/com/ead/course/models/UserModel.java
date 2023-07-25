@@ -1,4 +1,4 @@
-package com.ead.authServer.models;
+package com.ead.course.models;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -19,23 +19,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="TB_USERS_COURSES")
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserCourseModel implements Serializable {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Table(name = "TB_USERS")
+public class UserModel implements Serializable {
+	
 	private static final long serialVersionUID=1L;
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID Id;
-	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	private UserModel user;
-	
-	@Column(nullable = false)
-	private UUID courseId;
-	
-	
+    private UUID userId;
+
 }
