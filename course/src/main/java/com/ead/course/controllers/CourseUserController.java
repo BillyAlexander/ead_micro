@@ -23,6 +23,7 @@ import com.ead.course.dtos.SubscriptionDto;
 import com.ead.course.models.CourseModel;
 import com.ead.course.services.CourseService;
 import com.ead.course.services.UserService;
+import com.ead.course.specifications.SpecificationTemplate;
 
 @RestController
 @RequestMapping("/courses")
@@ -33,10 +34,10 @@ public class CourseUserController {
 	CourseService courseService;
 	
 	@Autowired
-	UserService courseUserService;
+	UserService userService;
 	
 	@GetMapping("/{courseId}/users")
-	public ResponseEntity<Object> getAllUsersByCourse(
+	public ResponseEntity<Object> getAllUsersByCourse(SpecificationTemplate.UserSpec spec,
 			@PageableDefault(page = 0, size = 10, sort = "userId", direction = Sort.Direction.ASC) Pageable pageable,
 			@PathVariable(value = "courseId") UUID courseId) {
 		
@@ -45,7 +46,7 @@ public class CourseUserController {
     		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found");
     	}
 		
-		return ResponseEntity.status(HttpStatus.OK).body("");
+		return ResponseEntity.status(HttpStatus.OK).body(userService.findAll(SpecificationTemplate.userCourseId(courseId).and(spec),pageable));
 	}
 
 	@PostMapping("/{courseId}/users/subscription")

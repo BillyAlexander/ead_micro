@@ -26,6 +26,15 @@ public class SpecificationTemplate {
 	public interface CourseSpec extends Specification<CourseModel> {
 	}
 
+	@And({
+        @Spec(path = "userType", spec = Equal.class),
+        @Spec(path = "fullname", spec = Like.class),
+        @Spec(path = "userStatus", spec = Equal.class),
+        @Spec(path = "email", spec = Like.class) ,
+	})
+	public interface UserSpec extends Specification<UserModel> {
+	}
+	
 	@Spec(path = "title", spec = LikeIgnoreCase.class)
 	public interface ModuleSpec extends Specification<ModuleModel> {
 	}
@@ -54,12 +63,32 @@ public class SpecificationTemplate {
 		};
 	}
 	
+//	public static Specification<CourseModel> courseUserId(final UUID userId){
+//    	return (root, query, cb)->{
+//    		query.distinct(true);
+//    		Join<CourseModel, UserModel> coursePro = root.join("coursesUsers");
+//    		return cb.equal(coursePro.get("userId"), userId);
+//    	};
+//    }
+//	
+	public static Specification<UserModel> userCourseId(final UUID courseId){
+		return (root, query, cb) -> {
+			query.distinct(true);
+			Root<UserModel> user = root;
+			Root<CourseModel> course = query.from(CourseModel.class);
+			Expression<Collection<UserModel>> courseUsers = course.get("users");
+			return cb.and(cb.equal(course.get("courseId"), courseId),cb.isMember(user, courseUsers));
+		};
+	}
+	
 	public static Specification<CourseModel> courseUserId(final UUID userId){
-    	return (root, query, cb)->{
-    		query.distinct(true);
-    		Join<CourseModel, UserModel> coursePro = root.join("coursesUsers");
-    		return cb.equal(coursePro.get("userId"), userId);
-    	};
-    }
+		return (root, query, cb) -> {
+			query.distinct(true);
+			Root<CourseModel> course = root;
+			Root<UserModel> user = query.from(UserModel.class);
+			Expression<Collection<CourseModel>> userCourses = user.get("courses");
+			return cb.and(cb.equal(user.get("userId"), userId), cb.isMember(course, userCourses));
+		};
+	}
 
 }

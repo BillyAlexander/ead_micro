@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ead.authServer.clients.CourseClient;
+import com.ead.authServer.enums.ActionType;
 import com.ead.authServer.models.UserModel;
+import com.ead.authServer.publishers.UserEventPublisher;
 import com.ead.authServer.repositories.UserRepository;
 import com.ead.authServer.services.UserService;
 
@@ -25,6 +27,9 @@ public class UserServiceImpl implements UserService {
     
     @Autowired
     CourseClient courseClient;
+    
+    @Autowired
+    UserEventPublisher userEventPublisher;
 
     @Override
     public List<UserModel> findAll() {
@@ -43,8 +48,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(UserModel userModel) {
-        userRepository.save(userModel);
+    public UserModel save(UserModel userModel) {
+        return userRepository.save(userModel);
     }
 
     @Override
@@ -61,5 +66,14 @@ public class UserServiceImpl implements UserService {
     public Page<UserModel> findAll(Specification<UserModel> spec, Pageable pageable) {
         return userRepository.findAll(spec,pageable);
     }
+    
+    @Transactional
+    @Override
+    public UserModel saveUser(UserModel userModel) {
+    	userModel = save(userModel);
+    	userEventPublisher.publishUserEvent(userModel.convertToUserEventDto(), ActionType.CREATE);
+    	return userModel;
+    }
+    
 
 }
