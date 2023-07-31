@@ -40,7 +40,7 @@ public class UserDto {
     @Size(min = 6, max = 20, groups = {UserView.RegistrationPost.class, UserView.PasswordPut.class})
     private String password;
 
-    @NotBlank@NotBlank(groups = UserView.PasswordPut.class)
+    @NotBlank(groups = UserView.PasswordPut.class)
     @JsonView({UserView.PasswordPut.class})
     @Size(min = 6, max = 20, groups = UserView.PasswordPut.class)
     private String oldPassword;
@@ -51,6 +51,7 @@ public class UserDto {
     @JsonView({UserView.RegistrationPost.class, UserView.UserPut.class})
     private String phoneNumber;
 
+    //hacer validacion de ci
     @JsonView({UserView.RegistrationPost.class, UserView.UserPut.class})
     private String documentId;
 
