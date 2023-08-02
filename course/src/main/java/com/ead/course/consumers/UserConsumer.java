@@ -13,7 +13,10 @@ import com.ead.course.dtos.UserEventDto;
 import com.ead.course.enums.ActionType;
 import com.ead.course.services.UserService;
 
+import lombok.extern.log4j.Log4j2;
+
 @Component
+@Log4j2
 public class UserConsumer {
 	
 	@Autowired
@@ -28,10 +31,17 @@ public class UserConsumer {
 	public void listenUserEvent(@Payload UserEventDto userEventDto) {
 		var userModel = userEventDto.convertToUserModel();
 		
+		log.info("UserEvent: "+userEventDto.getActionType());
 		switch (ActionType.valueOf(userEventDto.getActionType())) {
 		case CREATE:
 				userService.save(userModel);
 			break;
+		case UPDATE:
+			userService.save(userModel);
+		break;
+		case DELETE:
+			userService.delete(userEventDto.getUserId());
+		break;
 		}
 	}
 }
