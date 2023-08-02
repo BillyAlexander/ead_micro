@@ -1,5 +1,6 @@
 package com.ead.course.services.Impl;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class UserServiceImpl implements UserService {
 	public void delete(UUID userId) {
 		userRepository.deleteById(userId);	
 		
+	}
+
+	@Override
+	public Optional<UserModel> findByUd(UUID userInstructorId) {
+		return userRepository.findById(userInstructorId);
 	}
 	
 	
