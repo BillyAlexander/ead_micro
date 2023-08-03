@@ -36,6 +36,8 @@ ead:
   api:
     url:
       course: 'http://ead-course-service/ead_course/'
+      timeOutConnect: 5000
+      timeOutRead: 5000
   broker:
     exchange:
       userEvent: ead.userevent
@@ -46,3 +48,10 @@ eureka:
       defaultZone: 'http://localhost:8761/eureka'
   instance:
     hostname: localhost
+    
+resilience4j:
+  retry:
+    instances:
+      retryInstance:
+        max-attempts: 3
+        wait-duration: 5s    
