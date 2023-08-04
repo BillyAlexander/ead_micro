@@ -20,6 +20,7 @@ import com.ead.authServer.dtos.CourseDto;
 import com.ead.authServer.dtos.ResponsePageDto;
 import com.ead.authServer.services.UtilsService;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.extern.log4j.Log4j2;
 
@@ -38,15 +39,16 @@ public class CourseClient {
 	@Value("${ead.api.url.course}")
 	String REQUEST_URI_COURSE;
 
-	//@Retry(name = "retryInstance",fallbackMethod = "retryFallBack") used to re send request but, should be very carefully
+	//@Retry(name = "retryInstance",fallbackMethod = "retryFallBack") it is use to re send request but, should be very carefully
+	@CircuitBreaker(name = "circuitbreakerInstance"/*, fallbackMethod = "circuitbreakerFallBack"*/)
 	public Page<CourseDto> getAllCoursesByUser(UUID userId, Pageable pageable) {
 		List<CourseDto> searchResult = null;
 		ResponseEntity<ResponsePageDto<CourseDto>> result = null;
 		String url = REQUEST_URI_COURSE+utilsService.createUrl(userId, pageable);
 		log.info("Request course url: {} ", url);
 		try {
-			ParameterizedTypeReference<ResponsePageDto<CourseDto>> responseType = new ParameterizedTypeReference<ResponsePageDto<CourseDto>>() {
-			};
+			ParameterizedTypeReference<ResponsePageDto<CourseDto>> responseType = new ParameterizedTypeReference<ResponsePageDto<CourseDto>>() {};
+			log.debug("Llamando a  courserService");
 			result = restTemplate.exchange(url, HttpMethod.GET, null, responseType);
 			searchResult = result.getBody().getContent();
 			log.debug("Response Number of Elements: {} ", searchResult.size());
@@ -60,6 +62,12 @@ public class CourseClient {
 
 	public Page<CourseDto> retryFallBack(UUID userId, Pageable pageable, Throwable t){
 		log.error("Inside retry retryFallBack, cause - {} ",t.toString());
+		List<CourseDto> searchResult = new ArrayList<>();
+		return new PageImpl<>(searchResult);
+	}
+	
+	public Page<CourseDto> circuitbreakerFallBack(UUID userId, Pageable pageable, Throwable t){
+		log.error("Inside circuit breakerFallBack, cause - {} ",t.toString());
 		List<CourseDto> searchResult = new ArrayList<>();
 		return new PageImpl<>(searchResult);
 	}
