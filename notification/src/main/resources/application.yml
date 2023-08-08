@@ -39,7 +39,16 @@ logging:
     org.springframework.web: DEBUG
     org.hibernate: INFO
 
-# add broker properties
+ead:
+  broker:
+    exchange:
+      notificationCommandExchange: ead.notificationCommand
+    queue:
+      notificationCommandQueue:
+        name: ead.notificationCommand.ms.notification
+    key:
+      notificationCommandKey: ms.notification
+          
 
 management:
   endpoints:
