@@ -4,8 +4,15 @@ server:
 spring:
   application:
     name: ead_service_registre
-
+ead:
+  serviceRegistre:
+    userName: serviceRegistre
+    password: 'ead123sr'
+                
 eureka:
   client:
     register-with-eureka: false
-    fetch-registry: false    
+    fetch-registry: false
+    service-url:
+      defaultZone: 'http://${ead.serviceRegistry.userName}:${ead.serviceRegistry.password}@localhost:8671/eureka'  #for springSecurity    
+    
