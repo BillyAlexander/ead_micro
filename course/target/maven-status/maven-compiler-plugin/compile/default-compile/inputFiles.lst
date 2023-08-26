@@ -1,11 +1,13 @@
 B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\services\Impl\CourseServiceImpl.java
 B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\services\Impl\UserServiceImpl.java
+B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\publishers\NotificationCommandPublisher.java
 B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\validation\CourseValidator.java
 B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\models\LessonModel.java
 B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\services\UserService.java
 B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\specifications\SpecificationTemplate.java
 B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\repositories\ModuleRepository.java
 B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\repositories\LessonRepository.java
+B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\dtos\NotificationCommandDto.java
 B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\configs\ResolverConfig.java
 B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\consumers\UserConsumer.java
 B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\services\LessonService.java
