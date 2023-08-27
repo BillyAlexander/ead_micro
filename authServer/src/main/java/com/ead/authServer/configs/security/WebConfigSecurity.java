@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
-	private static final String[] AUTH_WHITE_LIST = {"ead_authuser/auth/**"};
+	private static final String[] AUTH_WHITE_LIST = {"/auth/**"};
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
