@@ -11,11 +11,17 @@ spring:
           uri: https://github.com/BillyAlexander/ead-config-server-micro
           default-label: main
           username: BillyAlexander
-          password: Password for authentication with remote repository. 
-    
+          password: '*****************' 
+
+
+ead:
+  serviceRegistre:
+    userName: serviceRegistre
+    password: 'ead123sr'
+        
 eureka:
   client:
     service-url:
-      defaultZone: 'http://localhost:8761/eureka'
+      defaultZone: 'http://${ead.serviceRegistre.userName}:${ead.serviceRegistre.password}@localhost:8761/eureka'
   instance:
     hostname: localhost    

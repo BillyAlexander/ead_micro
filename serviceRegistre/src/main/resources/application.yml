@@ -14,5 +14,5 @@ eureka:
     register-with-eureka: false
     fetch-registry: false
     service-url:
-      defaultZone: 'http://${ead.serviceRegistry.userName}:${ead.serviceRegistry.password}@localhost:8671/eureka'  #for springSecurity    
+      defaultZone: 'http://${ead.serviceRegistre.userName}:${ead.serviceRegistre.password}@localhost:8671/eureka'  #for springSecurity    
     
