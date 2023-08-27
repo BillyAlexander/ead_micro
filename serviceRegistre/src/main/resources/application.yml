@@ -15,4 +15,5 @@ eureka:
     fetch-registry: false
     service-url:
       defaultZone: 'http://${ead.serviceRegistre.userName}:${ead.serviceRegistre.password}@localhost:8671/eureka'  #for springSecurity    
-    
+  instance:
+    hostname: localhost   # I added this param
