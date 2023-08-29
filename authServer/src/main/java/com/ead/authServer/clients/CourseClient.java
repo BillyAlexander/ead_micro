@@ -10,6 +10,8 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -41,20 +43,22 @@ public class CourseClient {
 
 	//@Retry(name = "retryInstance",fallbackMethod = "retryFallBack") it is use to re send request but, should be very carefully
 	@CircuitBreaker(name = "circuitbreakerInstance"/*, fallbackMethod = "circuitbreakerFallBack"*/)
-	public Page<CourseDto> getAllCoursesByUser(UUID userId, Pageable pageable) {
+	public Page<CourseDto> getAllCoursesByUser(UUID userId, Pageable pageable, String token) {
 		List<CourseDto> searchResult = null;
 		ResponseEntity<ResponsePageDto<CourseDto>> result = null;
 		String url = REQUEST_URI_COURSE+utilsService.createUrl(userId, pageable);
 		log.info("Request course url: {} ", url);
-		try {
-			ParameterizedTypeReference<ResponsePageDto<CourseDto>> responseType = new ParameterizedTypeReference<ResponsePageDto<CourseDto>>() {};
-			log.debug("Llamando a  courserService");
-			result = restTemplate.exchange(url, HttpMethod.GET, null, responseType);
-			searchResult = result.getBody().getContent();
-			log.debug("Response Number of Elements: {} ", searchResult.size());
-		} catch (HttpStatusCodeException e) {
-			log.error("Error request /courses {} ", e);
-		}
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Authorization", token);
+		HttpEntity<String> requestEntity = new HttpEntity<String>("parameters",headers);
+	
+		ParameterizedTypeReference<ResponsePageDto<CourseDto>> responseType = new ParameterizedTypeReference<ResponsePageDto<CourseDto>>() {};
+		log.debug("Llamando a  courserService");
+		result = restTemplate.exchange(url, HttpMethod.GET, requestEntity, responseType);
+		searchResult = result.getBody().getContent();
+		log.debug("Response Number of Elements: {} ", searchResult.size());
+		
 		log.info("Ending request /courses userId {} ", userId);
 		return result.getBody();
 	}
