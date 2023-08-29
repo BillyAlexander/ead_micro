@@ -1,6 +1,8 @@
 package com.ead.authServer.configs.security;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -25,20 +27,26 @@ public class JwtProvider {
 	private int jwtExpirationTimeMs;
 	
 	public String generateJwt(Authentication authentication) {
-		 UserDetails userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+		 UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 		 Date dateNow=new Date();
 		 Date dateExpire = new Date((dateNow).getTime()+ jwtExpirationTimeMs);
+		 
+		 final String roles = userPrincipal.getAuthorities().stream().map(role -> {
+			 return role.getAuthority();
+		 }).collect(Collectors.joining(","));
+		 
 		 log.info("Is Generating Compact token user: {} since:{} until:{}",userPrincipal.getUsername(), dateNow, dateExpire);
 		 
 		 return Jwts.builder()
-				 .setSubject((userPrincipal.getUsername()))
+				 .setSubject((userPrincipal.getUserId().toString()))
+				 .claim("roles", roles)
 				 .setIssuedAt(dateNow)
 				 .setExpiration(dateExpire)
 				 .signWith(SignatureAlgorithm.HS512, jwtSecret)
 				 .compact();
 	}
 	
-	public String getUserName(String token) {
+	public String getSubjectJwt(String token) {
 		return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
 	}
 	

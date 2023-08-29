@@ -1,6 +1,7 @@
 package com.ead.authServer.configs.security;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -35,8 +36,8 @@ public class AuthenticationJwtFilter extends OncePerRequestFilter {
 		try {
 			String jwt = getTokenHeader(request);
 			if(jwt != null && jwtProvider.validateJwt(jwt)) {
-				String userName = jwtProvider.getUserName(jwt);
-				UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
+				String userId = jwtProvider.getSubjectJwt(jwt);
+				UserDetails userDetails = userDetailsService.loadUserById(UUID.fromString(userId));
 				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
 				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 				SecurityContextHolder.getContext().setAuthentication(authentication);
