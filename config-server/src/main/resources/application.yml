@@ -11,7 +11,7 @@ spring:
           uri: https://github.com/BillyAlexander/ead-config-server-micro
           default-label: main
           username: BillyAlexander
-          password: '****************'
+          password: 
 
 
 ead:
