@@ -107,5 +107,34 @@ public class AuthenticationController {
 
 		return "Loggin Spring";
 	}
+	
+	@PostMapping("/signup/admin/user")
+	public ResponseEntity<Object> registerAdminUser(
+			@RequestBody @Validated(UserDto.UserView.RegistrationPost.class) @JsonView(UserDto.UserView.RegistrationPost.class) UserDto userDto) {
+
+		log.debug("POST RECEIVED registerUser UserDto {}", userDto.toString());
+		if (userService.existsByUserName(userDto.getUserName())) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("Error: userName is already taken!.");
+		}
+		if (userService.existsByEmail(userDto.getEmail())) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("Error: email is already taken!.");
+		}
+
+		RoleModel roleModel = roleService.findByRoleName(RoleType.ROLE_ADMIN)
+				.orElseThrow(() -> new RuntimeException("Error: Role is not found!"));
+
+		userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+		var userModel = new UserModel();
+		BeanUtils.copyProperties(userDto, userModel);
+		userModel.setUserStatus(UserStatus.ACTIVE);
+		userModel.setUserType(UserType.ADMIN);
+		userModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
+		userModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
+
+		userModel.getRoles().add(roleModel);
+		userService.saveUser(userModel);
+		log.debug("POST SAVED registerUser getUserId {}", userModel.getUserId());
+		return ResponseEntity.status(HttpStatus.CREATED).body(userModel);
+	}
 
 }
