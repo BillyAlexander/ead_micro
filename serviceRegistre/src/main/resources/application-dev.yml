@@ -1,0 +1,19 @@
+server:
+  port: 8761
+  
+spring:
+  application:
+    name: ead_service_registre
+ead:
+  serviceRegistre:
+    userName: serviceRegistre
+    password: 'ead123sr'
+                
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: 'http://${ead.serviceRegistre.userName}:${ead.serviceRegistre.password}@localhost:8671/eureka'  #for springSecurity    
+  instance:
+    hostname: localhost   # I added this param

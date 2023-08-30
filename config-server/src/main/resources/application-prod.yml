@@ -1,0 +1,29 @@
+server:
+  port: ${PORT}
+
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/BillyAlexander/ead-config-server-micro
+          default-label: main
+          username: ${GIT_USERNAME}
+          password: ${GIT_PASSWORD}
+
+
+encrypt:
+  key: z%C*F-JaNdRgUkXp2s5u8x/A?D(G+KbPeShVmYq3t6w9y$B&E)H@McQfTjWnZr4u
+
+ead:
+  configServer:
+    userName: ${CONFIG_SERVER_USERNAME}
+    password: ${CONFIG_SERVER_PASSWORD}
+        
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL}
+  instance:
+    hostname: ${APP_DOMAIN_NAME}    # I added this param for heroku
+    non-secure-port: 80    

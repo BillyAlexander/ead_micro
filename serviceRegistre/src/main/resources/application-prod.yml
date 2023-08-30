@@ -1,0 +1,20 @@
+server:
+  port: ${PORT}
+  
+spring:
+  application:
+    name: ead_service_registre
+ead:
+  serviceRegistre:
+    userName: ${EUREKA_USERNAME}
+    password: ${EUREKA_PASSWORD}
+                
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: ${EUREKA_URL}    
+  instance:
+    hostname: ${APP_DOMAIN_NAME}    # I added this param for heroku
+    non-secure-port: 80
