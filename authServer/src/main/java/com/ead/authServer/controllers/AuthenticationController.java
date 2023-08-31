@@ -109,7 +109,7 @@ public class AuthenticationController {
 	}
 	
 	@PostMapping("/signup/admin/user")
-	public ResponseEntity<Object> registerAdminUser(
+	public ResponseEntity<Object> registerUserAdmin(
 			@RequestBody @Validated(UserDto.UserView.RegistrationPost.class) @JsonView(UserDto.UserView.RegistrationPost.class) UserDto userDto) {
 
 		log.debug("POST RECEIVED registerUser UserDto {}", userDto.toString());

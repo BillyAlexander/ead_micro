@@ -7,7 +7,7 @@ import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled=true)
 @EnableWebSecurity
 public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 
@@ -31,12 +31,12 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Bean
-	public RoleHierarchy roleHierarchy() {
-		RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
-		String hierarchy = "ROLE_ADMIN > ROLE_INSTRUCTOR \n ROLE_INSTRUCTOR > ROLE_STUDENT \n ROLE_STUDENT > ROLE_USER";
-		roleHierarchy.setHierarchy(hierarchy);
-		return roleHierarchy;
-	}
+    public RoleHierarchy roleHierarchy() {
+        RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
+        String hierarchy = "ROLE_ADMIN > ROLE_INSTRUCTOR \n ROLE_INSTRUCTOR > ROLE_STUDENT \n ROLE_STUDENT > ROLE_USER";
+        roleHierarchy.setHierarchy(hierarchy);
+        return roleHierarchy;
+    }
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
