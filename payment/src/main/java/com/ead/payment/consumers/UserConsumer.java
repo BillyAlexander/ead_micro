@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.ead.payment.dtos.UserEventDto;
 import com.ead.payment.enums.ActionType;
+import com.ead.payment.enums.PaymentStatus;
 import com.ead.payment.services.UserService;
 
 import lombok.extern.log4j.Log4j2;
@@ -33,6 +34,7 @@ var userModel = userEventDto.convertToUserModel();
 		log.info("UserEvent: "+userEventDto.getActionType());
 		switch (ActionType.valueOf(userEventDto.getActionType())) {
 		case CREATE:
+				userModel.setPaymentStatus(PaymentStatus.NOTSTARTED);
 				userService.save(userModel);
 			break;
 		case UPDATE:

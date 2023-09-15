@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "4daf14eb-bba0-4889-be15-057e5e03c024",
+		"name": "EAD-PAYMENT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2827401"
+	},
+	"item": [
+		{
+			"name": "GET INDEX",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0ZTAyOWI1OC0yNmRmLTQ3M2YtODk1Yy1iNDUyNjBkYzMxNmEiLCJyb2xlcyI6IlJPTEVfU1RVREVOVCIsImlhdCI6MTY2MzEwMjg3MiwiZXhwIjoxNjYzMTE3MjcyfQ.t3dCVVSFTmWFPjk_7EquNyotDLpvZEYy7vofNjJtdfRY_COgr0IdDvsm7Hqz2IleC8VB8s7AnpV_SIIskysxVQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8086/ead-payment/index",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"ead-payment",
+						"index"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST PAYMENT",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5MDgxMjdhMi1lYmE4LTQ4YjMtOTVkYS0yMTdhZDRmM2E4OTUiLCJyb2xlcyI6IlJPTEVfU1RVREVOVCIsImlhdCI6MTY3MTU1MzA3NiwiZXhwIjoxNjcxNTY3NDc2fQ.9oIxUMPF7-Keob3tw4DzgYqk5LumyHGa8k6yvTz9kCgGiz-xhal_asYG9NNKVx714XFBDd-k0lfpH7fVRUXE7Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"valuePaid\": 69.90,\r\n    \"cardHolderFullName\": \"Luiz Carlos Ferraz\",\r\n    \"cardHolderCpf\": \"446.735.779-30\",\r\n    \"creditCardNumber\": \"5555555555554444\",\r\n    \"expirationDate\": \"11/2025\",\r\n    \"cvvCode\": \"330\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8086/ead-payment/users/908127a2-eba8-48b3-95da-217ad4f3a895/payments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"ead-payment",
+						"users",
+						"908127a2-eba8-48b3-95da-217ad4f3a895",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ONE PAYMENT",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5MDgxMjdhMi1lYmE4LTQ4YjMtOTVkYS0yMTdhZDRmM2E4OTUiLCJyb2xlcyI6IlJPTEVfU1RVREVOVCIsImlhdCI6MTY3MTU1MzA3NiwiZXhwIjoxNjcxNTY3NDc2fQ.9oIxUMPF7-Keob3tw4DzgYqk5LumyHGa8k6yvTz9kCgGiz-xhal_asYG9NNKVx714XFBDd-k0lfpH7fVRUXE7Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8086/ead-payment/users/908127a2-eba8-48b3-95da-217ad4f3a895/payments/b5ad2857-981e-4251-ad72-a4d4678b6980",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"ead-payment",
+						"users",
+						"908127a2-eba8-48b3-95da-217ad4f3a895",
+						"payments",
+						"b5ad2857-981e-4251-ad72-a4d4678b6980"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL PAYMENTS",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5MDgxMjdhMi1lYmE4LTQ4YjMtOTVkYS0yMTdhZDRmM2E4OTUiLCJyb2xlcyI6IlJPTEVfU1RVREVOVCIsImlhdCI6MTY3MTQ3NjEyNSwiZXhwIjoxNjcxNDkwNTI1fQ.DSpsgHsNrWc9FQeApSleQY24Dqx1q7QVOayuBIrxmdXtS-8XxDi0Ebwp_IJAUejfbBAXCIYjgppLKxOJQS3a2g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8086/ead-payment/users/908127a2-eba8-48b3-95da-217ad4f3a895/payments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"ead-payment",
+						"users",
+						"908127a2-eba8-48b3-95da-217ad4f3a895",
+						"payments"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "size",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "sort",
+							"value": "paymentRequestDate,ASC",
+							"disabled": true
+						},
+						{
+							"key": "paymentControl",
+							"value": "REFUSED",
+							"disabled": true
+						},
+						{
+							"key": "valuePaid",
+							"value": "50.00",
+							"disabled": true
+						},
+						{
+							"key": "lastDigitsCreditCard",
+							"value": "5555",
+							"disabled": true
+						},
+						{
+							"key": "paymentMessage",
+							"value": "error",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ENCRYPT Secret Key",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ead123cs",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "configserver",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "secret key"
+				},
+				"url": {
+					"raw": "http://localhost:8888/encrypt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"encrypt"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,5 +1,6 @@
 package com.ead.payment.services.impl;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ead.payment.models.UserModel;
 import com.ead.payment.repositories.UserRepository;
 import com.ead.payment.services.UserService;
-
 @Service
-public class ServiceUserImpl implements UserService {
+public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
@@ -27,6 +27,12 @@ public class ServiceUserImpl implements UserService {
 	public void delete(UUID userId) {
 		userRepository.deleteById(userId);
 		
+	}
+
+	@Override
+	public Optional<UserModel> findById(UUID userId) {
+		
+		return userRepository.findById(userId);
 	}
 
 }
