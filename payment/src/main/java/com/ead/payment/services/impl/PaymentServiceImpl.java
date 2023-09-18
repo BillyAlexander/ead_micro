@@ -14,16 +14,22 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.ead.payment.dtos.PaymentCommandDto;
 import com.ead.payment.dtos.PaymentRequestDto;
 import com.ead.payment.enums.PaymentControl;
 import com.ead.payment.models.CreditCardModel;
 import com.ead.payment.models.PaymentModel;
 import com.ead.payment.models.UserModel;
+import com.ead.payment.publishers.PaymentCommandPublisher;
 import com.ead.payment.repositories.CreditCardRepository;
 import com.ead.payment.repositories.PaymentRepository;
 import com.ead.payment.services.PaymentService;
 
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
+
 @Service
+@Log4j2
 public class PaymentServiceImpl implements PaymentService {
 
 	@Autowired
@@ -31,6 +37,9 @@ public class PaymentServiceImpl implements PaymentService {
 
 	@Autowired
 	PaymentRepository paymentRepository;
+	
+	@Autowired
+	PaymentCommandPublisher paymentCommandPublisher;
 
 	@Transactional
 	@Override
@@ -49,7 +58,6 @@ public class PaymentServiceImpl implements PaymentService {
 
 		
 		//save paymentModel
-
 		var paymentModel = new PaymentModel();
 		paymentModel.setPaymentControl(PaymentControl.REQUESTED);
 		paymentModel.setPaymentRequestDate(LocalDateTime.now(ZoneId.of("UTC")));
@@ -58,8 +66,14 @@ public class PaymentServiceImpl implements PaymentService {
 		paymentModel.setValuePaid(paymentRequestDto.getValuePaid());
 		paymentModel.setUser(userModel);
 		paymentRepository.save(paymentModel);
-		//send request to queue
 		
+		//send request to queue
+		try {
+			var paymentCommandDto = new PaymentCommandDto(userModel.getUserId(), paymentModel.getPaymentId(), creditCardModel.getCardId());
+			paymentCommandPublisher.publishPaymentCommand(paymentCommandDto);
+		} catch (Exception e) {
+			log.warn("Error sending payment command");
+		}
 		
 		return paymentModel;
 	}
