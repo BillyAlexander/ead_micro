@@ -17,15 +17,17 @@ import org.springframework.stereotype.Service;
 import com.ead.payment.dtos.PaymentCommandDto;
 import com.ead.payment.dtos.PaymentRequestDto;
 import com.ead.payment.enums.PaymentControl;
+import com.ead.payment.enums.PaymentStatus;
 import com.ead.payment.models.CreditCardModel;
 import com.ead.payment.models.PaymentModel;
 import com.ead.payment.models.UserModel;
 import com.ead.payment.publishers.PaymentCommandPublisher;
 import com.ead.payment.repositories.CreditCardRepository;
 import com.ead.payment.repositories.PaymentRepository;
+import com.ead.payment.repositories.UserRepository;
 import com.ead.payment.services.PaymentService;
+import com.ead.payment.services.PaymentStripeService;
 
-import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
 
 @Service
@@ -40,6 +42,12 @@ public class PaymentServiceImpl implements PaymentService {
 	
 	@Autowired
 	PaymentCommandPublisher paymentCommandPublisher;
+	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	PaymentStripeService paymentStripeService;
 
 	@Transactional
 	@Override
@@ -92,6 +100,31 @@ public class PaymentServiceImpl implements PaymentService {
 	@Override
 	public Optional<PaymentModel> findPaymentByUser(UUID userId, UUID paymentId) {
 		return paymentRepository.findPaymentByUser(userId, paymentId);
+	}
+
+	@Transactional
+	@Override
+	public void makePayment(PaymentCommandDto paymentCommandDto) {
+		var paymentModel = paymentRepository.findById(paymentCommandDto.getPaymentId()).get();
+		var userModel = userRepository.findById(paymentCommandDto.getUserId()).get();
+		var creditCardModel = creditCardRepository.findById(paymentCommandDto.getCardId()).get();
+		
+		paymentModel= paymentStripeService.processStripePayment(paymentModel, creditCardModel);
+		paymentRepository.save(paymentModel);
+		
+		if(paymentModel.getPaymentControl().equals(PaymentControl.EFFECTED)){
+			userModel.setPaymentStatus(PaymentStatus.PAYING);
+			userModel.setLastPaymentDate(LocalDateTime.now(ZoneId.of("UTC")));
+			userModel.setPaymentExpirationDate(userModel.getLastPaymentDate().plusDays(30));
+			if(userModel.getFirstPaymentDate()==null){
+				userModel.setFirstPaymentDate(LocalDateTime.now(ZoneId.of("UTC")));
+			};;
+		}else {
+			userModel.setPaymentStatus(PaymentStatus.DEBTOR);;
+		}
+		userRepository.save(userModel);
+		
+		
 	}
 	
 

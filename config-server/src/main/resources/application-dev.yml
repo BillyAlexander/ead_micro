@@ -26,3 +26,6 @@ eureka:
       defaultZone: 'http://${ead.serviceRegistre.userName}:${ead.serviceRegistre.password}@localhost:8761/eureka'
   instance:
     hostname: localhost    
+    
+encrypt:
+  key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAM1i1sGfv9ZDaMw+Q+/4GbWIw9cIxOYbIA5zf63tXT0UBo36pydloC/jyyKX+WPvbxF1TWomWbZ4+KQzi456RgECAwEAAQ== #from generator online 512bit    
