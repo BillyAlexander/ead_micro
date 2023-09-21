@@ -122,7 +122,7 @@ public class PaymentServiceImpl implements PaymentService {
 			userModel.setPaymentExpirationDate(userModel.getLastPaymentDate().plusDays(30));
 			if(userModel.getFirstPaymentDate()==null){
 				userModel.setFirstPaymentDate(LocalDateTime.now(ZoneId.of("UTC")));
-			};;
+			};
 		}else {
 			userModel.setPaymentStatus(PaymentStatus.DEBTOR);;
 		}
