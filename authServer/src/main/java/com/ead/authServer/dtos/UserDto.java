@@ -2,9 +2,9 @@ package com.ead.authServer.dtos;
 
 import java.util.UUID;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import com.ead.authServer.validation.UserNameConstraint;
 import com.fasterxml.jackson.annotation.JsonInclude;

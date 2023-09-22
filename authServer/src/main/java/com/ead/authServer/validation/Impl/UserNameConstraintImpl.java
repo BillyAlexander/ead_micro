@@ -2,8 +2,8 @@ package com.ead.authServer.validation.Impl;
 
 import com.ead.authServer.validation.UserNameConstraint;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 public class UserNameConstraintImpl implements ConstraintValidator<UserNameConstraint,String> {
     @Override
