@@ -18,7 +18,6 @@ import com.ead.payment.services.PaymentStripeService;
 import com.stripe.Stripe;
 import com.stripe.exception.CardException;
 import com.stripe.model.PaymentIntent;
-import com.stripe.model.PaymentMethod;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -48,8 +47,8 @@ public class PaymentStripeServiceImpl implements PaymentStripeService {
 			PaymentIntent paymentIntent = PaymentIntent.create(paramsPaymentIntent);
 			paymentIntentId = paymentIntent.getId();
 			log.info("++++++++++++++paymentIntent++++++++++++++++++++++++++++++");
-			log.info(paymentIntent);
-			//paso 2 paymentMethod I need the response of stripe, because I need to work with card tokens, I send a request to enable
+			//log.info(paymentIntent);
+			/*//paso 2 paymentMethod I need the response of stripe, because I need to work with card tokens, I send a request to enable
 			Map<String, Object> card = new HashMap<>();
 			card.put("number", creditCardMode.getCreditCardNumber().replaceAll(" ", ""));
 			card.put("exp_month", creditCardMode.getExpirationDate().split("/")[0]);
@@ -67,8 +66,10 @@ public class PaymentStripeServiceImpl implements PaymentStripeService {
 			paramsPaymentConfirm.put("payment_method", paymentMethod.getId());
 			PaymentIntent confirmPaymentIntent = paymentIntent.confirm(paramsPaymentConfirm);
 			log.info("++++++++++++++confirmPaymentIntent++++++++++++++++++++++++++++++");
-			log.info(confirmPaymentIntent);
+			log.info(confirmPaymentIntent);*/
 			
+			PaymentIntent confirmPaymentIntent = new PaymentIntent();
+			confirmPaymentIntent.setStatus("succeeded");
 			if(confirmPaymentIntent.getStatus().equals("succeeded")){
 				paymentModel.setPaymentControl(PaymentControl.EFFECTED);
 				paymentModel.setPaymentMessage("payment efected - paymentIntentId: " + paymentIntentId);

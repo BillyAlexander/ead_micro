@@ -22,6 +22,7 @@ B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\configs\RabbitmqConf
 B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\services\Impl\ModuleServiceImpl.java
 B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\dtos\LessonDto.java
 B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\services\Impl\UserServiceImpl.java
+B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\configs\security\AccessDeniedHandlerImpl.java
 B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\publishers\NotificationCommandPublisher.java
 B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\validation\CourseValidator.java
 B:\decoder-pj\ead_micro\course\src\main\java\com\ead\course\configs\security\AuthenticationJwtFilter.java

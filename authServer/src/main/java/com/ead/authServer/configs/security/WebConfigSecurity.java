@@ -17,6 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import jakarta.servlet.DispatcherType;
+
 @Configuration
 @EnableMethodSecurity
 @EnableWebSecurity
@@ -60,7 +62,8 @@ public class WebConfigSecurity {
 			.authenticationEntryPoint(authenticationEntryPointImpl)
 		)
 		.authorizeHttpRequests((authorize) -> 
-			authorize.requestMatchers(AUTH_WHITE_LIST).permitAll()
+			authorize.dispatcherTypeMatchers(DispatcherType.ERROR).permitAll() // permit view example error 400 
+			.requestMatchers(AUTH_WHITE_LIST).permitAll()
 			.anyRequest().authenticated()
 		)
 		.sessionManagement(session -> 
