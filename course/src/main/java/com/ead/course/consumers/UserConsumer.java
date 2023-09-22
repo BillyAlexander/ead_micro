@@ -33,15 +33,8 @@ public class UserConsumer {
 		
 		log.info("UserEvent: "+userEventDto.getActionType());
 		switch (ActionType.valueOf(userEventDto.getActionType())) {
-		case CREATE:
-				userService.save(userModel);
-			break;
-		case UPDATE:
-			userService.save(userModel);
-		break;
-		case DELETE:
-			userService.delete(userEventDto.getUserId());
-		break;
+		case CREATE, UPDATE -> userService.save(userModel);
+		case DELETE -> userService.delete(userEventDto.getUserId());		
 		}
 	}
 }
